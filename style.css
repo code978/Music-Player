@@ -1,0 +1,243 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #121212;
+    color: #fff;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.music-player {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #181818;
+    border-radius: 8px;
+}
+
+.player-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.main-content {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.album-cover {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.album-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.song-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.artist {
+    color: #b3b3b3;
+    font-size: 16px;
+}
+
+.player-controls {
+    padding: 20px 0;
+}
+
+.progress-container {
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    background: #404040;
+    height: 4px;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.progress {
+    background: #1db954;
+    height: 100%;
+    border-radius: 2px;
+}
+
+.time-stamps {
+    display: flex;
+    justify-content: space-between;
+    color: #b3b3b3;
+    font-size: 12px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 20px;
+}
+
+.controls button {
+    border: none;
+    background: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.play-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #fff !important;
+    color: #000 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px !important;
+}
+
+.extra-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.volume-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 140px;
+}
+
+.volume-slider {
+    -webkit-appearance: none;
+    width: 100px;
+    height: 4px;
+    background: #404040;
+    border-radius: 2px;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.speed-container {
+    color: #1db954;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.comments-section {
+    margin-top: 30px;
+    border-top: 1px solid #282828;
+    padding-top: 20px;
+}
+
+.comment-input {
+    width: 100%;
+    background: #282828;
+    border: none;
+    color: #fff;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    resize: vertical;
+}
+
+.save-comment {
+    background: #1db954;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.comment-item {
+    background: #282828;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 4px;
+    color: #fff;
+    margin-left: 0;
+}
+
+.comment-replies {
+    margin-left: 20px;
+    border-left: 2px solid #404040;
+    padding-left: 10px;
+}
+
+.reply-input {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.reply-btn {
+    background: none;
+    border: none;
+    color: #1db954;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.comment-content small {
+    color: #808080;
+    margin-left: 10px;
+}
+
+/* Speed Control Styles */
+.speed-options {
+    display: flex;
+    gap: 8px;
+}
+
+.speed-btn {
+    background: #282828;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.speed-btn.active {
+    background: #1db954;
+}
+
+/* Dark Theme */
+body.dark-theme {
+    background: #121212;
+}
+
+.dark-theme .music-player {
+    background: #181818;
+    color: #fff;
+}
+
+/* Remove dark theme styles since we're using Spotify's dark theme by default */
