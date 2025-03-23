@@ -235,9 +235,80 @@ body.dark-theme {
     background: #121212;
 }
 
-.dark-theme .music-player {
+body.dark-theme .music-player {
     background: #181818;
     color: #fff;
 }
 
-/* Remove dark theme styles since we're using Spotify's dark theme by default */
+body.dark-theme .progress-bar {
+    background: #404040;
+}
+
+body.dark-theme .progress {
+    background: #1db954;
+}
+
+body.dark-theme .time-stamps {
+    color: #b3b3b3;
+}
+
+body.dark-theme .controls button {
+    color: #fff;
+}
+
+body.dark-theme .play-btn {
+    background: #fff !important;
+    color: #000 !important;
+}
+
+body.dark-theme .extra-controls {
+    color: #1db954;
+}
+
+body.dark-theme .volume-slider {
+    background: #404040;
+}
+
+body.dark-theme .volume-slider::-webkit-slider-thumb {
+    background: #fff;
+}
+
+body.dark-theme .comments-section {
+    border-top: 1px solid #282828;
+}
+
+body.dark-theme .comment-input {
+    background: #282828;
+    color: #fff;
+}
+
+body.dark-theme .save-comment {
+    background: #1db954;
+    color: #fff;
+}
+
+body.dark-theme .comment-item {
+    background: #282828;
+    color: #fff;
+}
+
+body.dark-theme .comment-replies {
+    border-left: 2px solid #404040;
+}
+
+body.dark-theme .reply-btn {
+    color: #1db954;
+}
+
+body.dark-theme .comment-content small {
+    color: #808080;
+}
+
+body.dark-theme .speed-btn {
+    background: #282828;
+    color: #fff;
+}
+
+body.dark-theme .speed-btn.active {
+    background: #1db954;
+}

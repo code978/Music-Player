@@ -226,7 +226,7 @@ saveCommentBtn.addEventListener('click', saveComment);
 
 // Update theme function
 function setTheme(theme) {
-    document.body.setAttribute('data-theme', theme);
+    document.body.classList.toggle('dark-theme', theme === 'dark');
     localStorage.setItem(STORAGE_KEYS.THEME, theme);
     
     // Update theme toggle icon
@@ -236,7 +236,7 @@ function setTheme(theme) {
 
 // Add theme toggle button listener
 document.querySelector('.theme-toggle').addEventListener('click', () => {
-    const currentTheme = document.body.getAttribute('data-theme') || 'light';
+    const currentTheme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
     setTheme(currentTheme === 'light' ? 'dark' : 'light');
 });
 
