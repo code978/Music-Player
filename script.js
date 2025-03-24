@@ -22,7 +22,7 @@ const playlist = [
         cover: "covers/carry-on.jpg"
     },
     {
-        title: "Mortals Tokyo",
+        title: "bounce On",
         artist: "Warriyo",
         audio: "music/bounce-on.mp3",
         cover: "covers/bounce-on.jpg"
