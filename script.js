@@ -20,7 +20,13 @@ const playlist = [
         artist: "Rivalz",
         audio: "music/carry-on.mp3",
         cover: "covers/carry-on.jpg"
-    }
+    },
+    {
+        title: "Mortals Tokyo",
+        artist: "Warriyo",
+        audio: "music/bounce-on.mp3",
+        cover: "covers/bounce-on.jpg"
+    },
     // Add more songs as needed
 ];
 
