@@ -209,26 +209,134 @@ volumeSlider.addEventListener('input', (e) => {
     updateVolumeIcon(volume);
 });
 
-// Comments functionality
+// Update Comments functionality
 function loadComments() {
     const comments = JSON.parse(localStorage.getItem(STORAGE_KEYS.COMMENTS) || '{}');
     const songComments = comments[currentSongIndex] || [];
-    commentsList.innerHTML = songComments
-        .filter(comment => !comment.parentId)
-        .map(comment => renderComment(comment))
-        .join('');
+    
+    commentsList.innerHTML = '';
+    songComments.forEach(comment => {
+        if (!comment.parentId) {
+            commentsList.appendChild(createCommentElement(comment));
+        }
+    });
 }
 
-function saveComment() {
-    const comment = commentInput.value.trim();
-    if (!comment) return;
+function createCommentElement(comment) {
+    const div = document.createElement('div');
+    div.className = 'comment-item';
+    div.dataset.id = comment.id;
 
-    addComment(comment);
-    commentInput.value = '';
+    const content = document.createElement('div');
+    content.className = 'comment-content';
+    content.innerHTML = `
+        <p>${comment.text}</p>
+        <small>${new Date(comment.timestamp).toLocaleString()}</small>
+        <button class="reply-btn">Reply</button>
+    `;
+    div.appendChild(content);
+
+    if (comment.replies && comment.replies.length > 0) {
+        const repliesDiv = document.createElement('div');
+        repliesDiv.className = 'comment-replies';
+        comment.replies.forEach(reply => {
+            repliesDiv.appendChild(createCommentElement(reply));
+        });
+        div.appendChild(repliesDiv);
+    }
+
+    return div;
+}
+
+function addComment(text, parentId = null) {
+    const comments = JSON.parse(localStorage.getItem(STORAGE_KEYS.COMMENTS) || '{}');
+    if (!comments[currentSongIndex]) {
+        comments[currentSongIndex] = [];
+    }
+
+    const newComment = {
+        id: Date.now(),
+        text,
+        parentId,
+        replies: [],
+        timestamp: new Date().toISOString()
+    };
+
+    if (parentId) {
+        const findAndAddReply = (commentsList) => {
+            for (let comment of commentsList) {
+                if (comment.id === parentId) {
+                    if (!comment.replies) comment.replies = [];
+                    comment.replies.push(newComment);
+                    return true;
+                }
+                if (comment.replies && findAndAddReply(comment.replies)) {
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        findAndAddReply(comments[currentSongIndex]);
+    } else {
+        comments[currentSongIndex].push(newComment);
+    }
+
+    localStorage.setItem(STORAGE_KEYS.COMMENTS, JSON.stringify(comments));
     loadComments();
 }
 
-saveCommentBtn.addEventListener('click', saveComment);
+// Initialize event listeners for comments
+document.addEventListener('DOMContentLoaded', () => {
+    saveCommentBtn.addEventListener('click', () => {
+        const text = commentInput.value.trim();
+        if (text) {
+            addComment(text);
+            commentInput.value = '';
+        }
+    });
+
+    commentInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            saveCommentBtn.click();
+        }
+    });
+
+    commentsList.addEventListener('click', (e) => {
+        if (e.target.classList.contains('reply-btn')) {
+            const existingReply = document.querySelector('.reply-input');
+            if (existingReply) existingReply.remove();
+
+            const commentItem = e.target.closest('.comment-item');
+            const parentId = parseInt(commentItem.dataset.id);
+            
+            const replyInput = document.createElement('div');
+            replyInput.className = 'reply-input';
+            replyInput.innerHTML = `
+                <textarea placeholder="Write a reply..."></textarea>
+                <button class="save-reply">Reply</button>
+                <button class="cancel-reply">Cancel</button>
+            `;
+            
+            commentItem.appendChild(replyInput);
+            const textarea = replyInput.querySelector('textarea');
+            textarea.focus();
+
+            replyInput.querySelector('.save-reply').addEventListener('click', () => {
+                const text = textarea.value.trim();
+                if (text) {
+                    addComment(text, parentId);
+                    replyInput.remove();
+                }
+            });
+
+            replyInput.querySelector('.cancel-reply').addEventListener('click', () => {
+                replyInput.remove();
+            });
+        }
+    });
+});
 
 // Update theme function
 function setTheme(theme) {
